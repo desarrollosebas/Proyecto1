@@ -8,9 +8,19 @@ class enviodepaquetes
         string ciudad_destino = "";
         bool tipo_cliente;
         int cantidad_items = 0;
-        string categoria_despacho;
+        string categoria_despacho ="";
         float costo_envio = 0;
-        
+
+    Console.witeLine("Ingrese el monto del pedido:");
+    
+
+
+
+
+
+
+
+
     }
 
 
