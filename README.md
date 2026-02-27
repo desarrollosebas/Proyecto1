@@ -41,10 +41,9 @@ Una tienda en línea necesita un programa que, dados los datos de un pedido, det
 | 4 | `cantidad_items` | int | Cantidad de artículos en el pedido | > 0 |
 | 5 | `categoria_despacho` | string | Categoría del envío asignada | "gratis", "express", "estándar" |
 | 6 | `costo_envio` | decimal | Costo del envío calculado | ≥ 0 |
-| 7 | `es_cliente_recurrente` | boolean | Determina si cliente es recurrente | true / false |
-| 8 | `es_destino_exterior` | boolean | Determina si destino es exterior | true / false |
-| 9 | `mensaje_cliente` | string | Mensaje informativo al cliente | texto descriptivo |
-| 10 | `costo_adicional` | decimal | Costo adicional por exterior | ≥ 0 |
+| 7 | `es_destino_exterior` | boolean | Determina si destino es exterior | true / false |
+| 8 | `mensaje_cliente` | string | Mensaje informativo al cliente | texto descriptivo |
+| 9 | `costo_adicional` | decimal | Costo adicional por exterior | ≥ 0 |
 
 ---
 
