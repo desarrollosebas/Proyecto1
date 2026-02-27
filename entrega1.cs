@@ -12,6 +12,10 @@ class enviodepaquetes
         float costo_envio = 0;
 
     Console.witeLine("Ingrese el monto del pedido:");
+    monto_pedido = float.Parse(Console.ReadLine());
+
+    Console.WriteLine("Ingrese la ciudad de destino:");
+    ciudad_destino = Console.ReadLine();
     
 
 
