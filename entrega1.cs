@@ -31,7 +31,6 @@ else
   
 
     Console.WriteLine("¿Es un cliente frecuente?");
-    Console.WriteLine("Ingrese 'si' para cliente frecuente o 'no' para cliente no frecuente:");
     Console.WriteLine("1. Sí");
     Console.WriteLine("2. No");
 
