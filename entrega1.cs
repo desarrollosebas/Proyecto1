@@ -1,10 +1,20 @@
-int montopedido = 0;
-string ciudadpedido = "";
-bool tipodecliente;
-int cantidadpedido = 0;
+using System;
 
-Console.WriteLine("Ingrese el monto del pedido:");
+class enviodepaquetes
+{
+    static void Main()
+    {
+        float monto_pedido = 0;
+        string ciudad_destino = "";
+        bool tipo_cliente;
+        int cantidad_items = 0;
+        string categoria_despacho;
+        float costo_envio = 0;
+        
+    }
 
-Console.WriteLine("Ingrese la ciudad del pedido:");
 
-Console.WriteLine("Ingrese el tipo de cliente (true para mayorista, false para minorista):");
+
+    
+}
+    
