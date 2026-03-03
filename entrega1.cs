@@ -19,6 +19,7 @@ class enviodepaquetes
 {
     // Mensaje o excepción si monto no es válido
     Console.WriteLine("Monto inválido");
+            return;
 }
 
   Console.WriteLine("¿El envio es internacional? (si/no)");
@@ -54,7 +55,7 @@ else
     
 Console.WriteLine("Ingrese la cantidad de items:");
 cantidad_items = int.Parse(Console.ReadLine());
-if (cantidadItems <= 0)
+if (cantidad_items <= 0)
 {
     // Mensaje o excepción si cantidad no es válida
     Console.WriteLine("Cantidad de items inválida");
