@@ -1,5 +1,4 @@
-##Descripcion del equipo
-#Integrantes
+## Descripcion del equipo
 
 ## Sistema de Clasificación de Pedidos
 
