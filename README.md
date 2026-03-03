@@ -1,7 +1,7 @@
 ## Descripcion del equipo
 Integrantes:
-Arturo Andr
-
+Arturo Andres Patiño Herrera Y Sebastian Raigosa Gil
+Se realiza propuesta A del docente
 
 
 ## Sistema de Clasificación de Pedidos
