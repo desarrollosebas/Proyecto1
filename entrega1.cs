@@ -15,6 +15,11 @@ class enviodepaquetes
   //el parse se usa simpre ya que el computador entrega un string entonces se parsea a un numero para poder hacer operaciones matematicas con el :V
     Console.WriteLine("Ingrese el monto del pedido:");
     monto_pedido = decimal.Parse(Console.ReadLine());
+        if (monto_Pedido <= 0)
+{
+    // Mensaje o excepción si monto no es válido
+    Console.WriteLine("Monto inválido");
+}
 
   Console.WriteLine("¿El envio es internacional? (si/no)");
 string respuesta = Console.ReadLine();
@@ -49,8 +54,40 @@ else
     
 Console.WriteLine("Ingrese la cantidad de items:");
 cantidad_items = int.Parse(Console.ReadLine());
+if (cantidadItems <= 0)
+{
+    // Mensaje o excepción si cantidad no es válida
+    Console.WriteLine("Cantidad de items inválida");
+}
 
+if (monto_Pedido >= 150000 && clientefrecuente = true)
+{
+    categoria_despacho = "gratis";
+    costo_envio = 0;
+}
+    else if (cantidad_items >= 5 || monto_Pedido >= 300000)
+{
+    categoria_despacho = "express";
+    costo_envio = 50;
+}
+else
+{
+    // Envío estándar
+    categoria_despacho = "estándar";
+    costo_envio = 20;
+}
 
+// Costo adicional por ciudad exterior
+if (ciudadDestino.ToLower() != "local")
+{
+    costoEnvio += 15m;
+}
+
+// Mensaje final
+mensajeCliente = $"Su envío será {categoriaEnvio} con un costo de ${costoEnvio}.";
+
+// Mostrar resultado
+Console.WriteLine(mensajeCliente);
 // HOLA
 
     }  
