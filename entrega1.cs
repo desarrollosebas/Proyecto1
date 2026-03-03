@@ -51,15 +51,8 @@ Console.WriteLine("Ingrese la cantidad de items:");
 cantidad_items = int.Parse(Console.ReadLine());
 
 
+// HOLA
 
-
-
-
-
-    }
-
-
-
-    
+    }  
 }
     
