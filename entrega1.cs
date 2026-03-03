@@ -50,6 +50,7 @@ class enviodepaquetes
         else
         {
             clienteFrecuente = false;
+            return;
         }
 
         Console.WriteLine("Ingrese la cantidad de items:");
