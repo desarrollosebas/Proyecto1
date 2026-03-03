@@ -1,4 +1,8 @@
 ## Descripcion del equipo
+Integrantes:
+Arturo Andr
+
+
 
 ## Sistema de Clasificación de Pedidos
 
