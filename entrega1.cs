@@ -1,5 +1,5 @@
 using System;
-//el class es el molde para crear objetos, es como una plantilla que define las propiedades y comportamientos de los objetos (variables ps) y lo que le acontece puede ser cualquier nombre para describir el programa, en este caso se llama envio paquetes
+
 class enviodepaquetes
 {
     static void Main()
@@ -12,30 +12,46 @@ class enviodepaquetes
             Console.WriteLine("1. Calcular envío");
             Console.WriteLine("2. Salir");
             Console.Write("Seleccione una opción: ");
-            opcionMenu = int.Parse(Console.ReadLine());
+
+            while (!int.TryParse(Console.ReadLine(), out opcionMenu))
+            {
+                Console.WriteLine("Entrada inválida. Intente de nuevo:");
+            }
 
             if (opcionMenu == 1)
             {
                 bool clienteFrecuente = false;
-                decimal monto_pedido = 0m;
+                decimal monto_pedido;
                 string ciudad_destino = "";
-                int cantidad_items = 0;
+                int cantidad_items;
                 string categoria_despacho = "";
                 decimal costo_envio = 0m;
 
-                Console.WriteLine("Ingrese el monto del pedido:");
-                monto_pedido = decimal.Parse(Console.ReadLine());
-
-                if (monto_pedido <= 0)
+                // Validar monto
+                do
                 {
-                    Console.WriteLine("Monto inválido");
-                    continue;
-                }
+                    Console.WriteLine("Ingrese el monto del pedido:");
+                    if (!decimal.TryParse(Console.ReadLine(), out monto_pedido) || monto_pedido <= 0)
+                    {
+                        Console.WriteLine("Monto inválido. Intente nuevamente.");
+                    }
+                } while (monto_pedido <= 0);
 
-                Console.WriteLine("¿El envío es internacional? (si/no)");
-                string respuesta = Console.ReadLine();
+                // Validar internacional
+                string respuesta;
+                do
+                {
+                    Console.WriteLine("¿El envío es internacional? (si/no)");
+                    respuesta = Console.ReadLine().ToLower();
 
-                if (respuesta.ToLower() == "si")
+                    if (respuesta != "si" && respuesta != "no")
+                    {
+                        Console.WriteLine("Respuesta inválida. Escriba 'si' o 'no'.");
+                    }
+
+                } while (respuesta != "si" && respuesta != "no");
+
+                if (respuesta == "si")
                 {
                     ciudad_destino = "Internacional";
                 }
@@ -45,29 +61,33 @@ class enviodepaquetes
                     ciudad_destino = Console.ReadLine();
                 }
 
-                Console.WriteLine("¿Es un cliente frecuente?");
-                Console.WriteLine("1. Sí");
-                Console.WriteLine("2. No");
-
-                int opcion = int.Parse(Console.ReadLine());
-
-                if (opcion == 1)
+                // Validar cliente frecuente
+                int opcionCliente;
+                do
                 {
-                    clienteFrecuente = true;
-                }
-                else
-                {
-                    clienteFrecuente = false;
-                }
+                    Console.WriteLine("¿Es un cliente frecuente?");
+                    Console.WriteLine("1. Sí");
+                    Console.WriteLine("2. No");
 
-                Console.WriteLine("Ingrese la cantidad de items:");
-                cantidad_items = int.Parse(Console.ReadLine());
+                    if (!int.TryParse(Console.ReadLine(), out opcionCliente) || (opcionCliente != 1 && opcionCliente != 2))
+                    {
+                        Console.WriteLine("Opción inválida. Intente nuevamente.");
+                    }
 
-                if (cantidad_items <= 0)
+                } while (opcionCliente != 1 && opcionCliente != 2);
+
+                clienteFrecuente = (opcionCliente == 1);
+
+                // Validar cantidad de items
+                do
                 {
-                    Console.WriteLine("Cantidad de items inválida");
-                    continue;
-                }
+                    Console.WriteLine("Ingrese la cantidad de items:");
+                    if (!int.TryParse(Console.ReadLine(), out cantidad_items) || cantidad_items <= 0)
+                    {
+                        Console.WriteLine("Cantidad inválida. Intente nuevamente.");
+                    }
+
+                } while (cantidad_items <= 0);
 
                 // Lógica de despacho
                 if (monto_pedido >= 150000 && clienteFrecuente)
@@ -104,7 +124,7 @@ class enviodepaquetes
             }
             else
             {
-                Console.WriteLine("Opción inválida");
+                Console.WriteLine("Opción inválida.");
             }
 
         } while (opcionMenu != 2);
