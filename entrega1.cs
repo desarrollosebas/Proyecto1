@@ -1,16 +1,19 @@
 using System;
+using System.Collections.Generic;
 
 class enviodepaquetes
 {
     static void Main()
     {
         int opcionMenu;
+        List<string> historialEnvios = new List<string>();
 
         do
         {
             Console.WriteLine("\n=== MENÚ DE ENVÍOS ===");
             Console.WriteLine("1. Calcular envío");
-            Console.WriteLine("2. Salir");
+            Console.WriteLine("2. Ver historial");
+            Console.WriteLine("3. Salir");
             Console.Write("Seleccione una opción: ");
 
             while (!int.TryParse(Console.ReadLine(), out opcionMenu))
@@ -46,7 +49,7 @@ class enviodepaquetes
 
                     if (respuesta != "si" && respuesta != "no")
                     {
-                        Console.WriteLine("Respuesta inválida. Escriba 'si' o 'no'.");
+                        Console.WriteLine("Respuesta inválida.");
                     }
 
                 } while (respuesta != "si" && respuesta != "no");
@@ -61,30 +64,30 @@ class enviodepaquetes
                     ciudad_destino = Console.ReadLine();
                 }
 
-                // Validar cliente frecuente
+                // Cliente frecuente
                 int opcionCliente;
                 do
                 {
-                    Console.WriteLine("¿Es un cliente frecuente?");
+                    Console.WriteLine("¿Es cliente frecuente?");
                     Console.WriteLine("1. Sí");
                     Console.WriteLine("2. No");
 
                     if (!int.TryParse(Console.ReadLine(), out opcionCliente) || (opcionCliente != 1 && opcionCliente != 2))
                     {
-                        Console.WriteLine("Opción inválida. Intente nuevamente.");
+                        Console.WriteLine("Opción inválida.");
                     }
 
                 } while (opcionCliente != 1 && opcionCliente != 2);
 
                 clienteFrecuente = (opcionCliente == 1);
 
-                // Validar cantidad de items
+                // Cantidad de items
                 do
                 {
                     Console.WriteLine("Ingrese la cantidad de items:");
                     if (!int.TryParse(Console.ReadLine(), out cantidad_items) || cantidad_items <= 0)
                     {
-                        Console.WriteLine("Cantidad inválida. Intente nuevamente.");
+                        Console.WriteLine("Cantidad inválida.");
                     }
 
                 } while (cantidad_items <= 0);
@@ -106,27 +109,46 @@ class enviodepaquetes
                     costo_envio = 20;
                 }
 
-                // Costo adicional si no es local
                 if (ciudad_destino.ToLower() != "local")
                 {
                     costo_envio += 15;
                 }
 
-                string mensajeCliente = "\nResumen del envío:" +
-                                        "\nCategoría: " + categoria_despacho +
-                                        "\nCosto de envío: $" + costo_envio;
+                string resumen = "Categoría: " + categoria_despacho +
+                                 " | Costo: $" + costo_envio +
+                                 " | Destino: " + ciudad_destino;
 
-                Console.WriteLine(mensajeCliente);
+                Console.WriteLine("\nResumen del envío:");
+                Console.WriteLine(resumen);
+
+                // 🔥 Guardar en la lista
+                historialEnvios.Add(resumen);
             }
             else if (opcionMenu == 2)
             {
-                Console.WriteLine("Saliendo del programa...");
+                Console.WriteLine("\n=== HISTORIAL DE ENVÍOS ===");
+
+                if (historialEnvios.Count == 0)
+                {
+                    Console.WriteLine("No hay envíos registrados.");
+                }
+                else
+                {
+                    foreach (string envio in historialEnvios)
+                    {
+                        Console.WriteLine(envio);
+                    }
+                }
+            }
+            else if (opcionMenu == 3)
+            {
+                Console.WriteLine("Saliendo...");
             }
             else
             {
                 Console.WriteLine("Opción inválida.");
             }
 
-        } while (opcionMenu != 2);
+        } while (opcionMenu != 3);
     }
 }
