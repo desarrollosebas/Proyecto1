@@ -98,8 +98,11 @@ class enviodepaquetes
                     costo_envio += 15;
                 }
 
+                // Mostrar el costo en miles (multiplicado por 1000 y con separadores de miles)
+                decimal costoFinal = costo_envio * 1000;
+
                 string resumen = "Categoría: " + categoria_despacho +
-                                 " | Costo: $" + costo_envio +
+                                 " | Costo: $" + costoFinal.ToString("N0") +
                                  " | Destino: " + ciudad_destino;
 
                 Console.WriteLine("\nResumen del envío:");
