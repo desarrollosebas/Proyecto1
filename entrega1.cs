@@ -23,7 +23,7 @@ class enviodepaquetes
 
             if (opcionMenu == 1)
             {
-                bool clienteFrecuente = false;
+                bool clienteFrecuente;
                 decimal monto_pedido;
                 string ciudad_destino = "";
                 int cantidad_items;
@@ -34,34 +34,24 @@ class enviodepaquetes
                 do
                 {
                     Console.WriteLine("Ingrese el monto del pedido:");
-                    if (!decimal.TryParse(Console.ReadLine(), out monto_pedido) || monto_pedido <= 0)
-                    {
-                        Console.WriteLine("Monto inválido. Intente nuevamente.");
-                    }
-                } while (monto_pedido <= 0);
+                } while (!decimal.TryParse(Console.ReadLine(), out monto_pedido) || monto_pedido <= 0);
 
-                // Validar internacional
+                // Tipo de envío
                 string respuesta;
                 do
                 {
-                    Console.WriteLine("¿El envío es internacional? (si/no)");
+                    Console.WriteLine("¿El envío es al exterior? (si/no)");
                     respuesta = Console.ReadLine().ToLower();
-
-                    if (respuesta != "si" && respuesta != "no")
-                    {
-                        Console.WriteLine("Respuesta inválida.");
-                    }
-
                 } while (respuesta != "si" && respuesta != "no");
 
                 if (respuesta == "si")
                 {
-                    ciudad_destino = "Internacional";
+                    ciudad_destino = "exterior";
                 }
                 else
                 {
                     Console.WriteLine("Ingrese la ciudad de destino:");
-                    ciudad_destino = Console.ReadLine();
+                    ciudad_destino = Console.ReadLine().ToLower();
                 }
 
                 // Cliente frecuente
@@ -71,13 +61,7 @@ class enviodepaquetes
                     Console.WriteLine("¿Es cliente frecuente?");
                     Console.WriteLine("1. Sí");
                     Console.WriteLine("2. No");
-
-                    if (!int.TryParse(Console.ReadLine(), out opcionCliente) || (opcionCliente != 1 && opcionCliente != 2))
-                    {
-                        Console.WriteLine("Opción inválida.");
-                    }
-
-                } while (opcionCliente != 1 && opcionCliente != 2);
+                } while (!int.TryParse(Console.ReadLine(), out opcionCliente) || (opcionCliente != 1 && opcionCliente != 2));
 
                 clienteFrecuente = (opcionCliente == 1);
 
@@ -85,31 +69,31 @@ class enviodepaquetes
                 do
                 {
                     Console.WriteLine("Ingrese la cantidad de items:");
-                    if (!int.TryParse(Console.ReadLine(), out cantidad_items) || cantidad_items <= 0)
-                    {
-                        Console.WriteLine("Cantidad inválida.");
-                    }
+                } while (!int.TryParse(Console.ReadLine(), out cantidad_items) || cantidad_items <= 0);
 
-                } while (cantidad_items <= 0);
+                // REGLAS DE NEGOCIO
 
-                // Lógica de despacho
+                // 1. Envío gratis
                 if (monto_pedido >= 150000 && clienteFrecuente)
                 {
                     categoria_despacho = "Gratis";
                     costo_envio = 0;
                 }
+                // 2. Envío express
                 else if (cantidad_items >= 5 || monto_pedido >= 300000)
                 {
                     categoria_despacho = "Express";
                     costo_envio = 50;
                 }
+                // 3. Envío estándar
                 else
                 {
                     categoria_despacho = "Estándar";
                     costo_envio = 20;
                 }
 
-                if (ciudad_destino.ToLower() != "local")
+                // 4. Costo adicional si es exterior
+                if (ciudad_destino == "exterior")
                 {
                     costo_envio += 15;
                 }
@@ -121,7 +105,6 @@ class enviodepaquetes
                 Console.WriteLine("\nResumen del envío:");
                 Console.WriteLine(resumen);
 
-                // 🔥 Guardar en la lista
                 historialEnvios.Add(resumen);
             }
             else if (opcionMenu == 2)
@@ -139,14 +122,6 @@ class enviodepaquetes
                         Console.WriteLine(envio);
                     }
                 }
-            }
-            else if (opcionMenu == 3)
-            {
-                Console.WriteLine("Saliendo...");
-            }
-            else
-            {
-                Console.WriteLine("Opción inválida.");
             }
 
         } while (opcionMenu != 3);
