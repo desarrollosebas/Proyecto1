@@ -7,6 +7,7 @@ class enviodepaquetes
     {
         int opcionMenu;
         List<string> historialEnvios = new List<string>();
+        List<decimal> costosEnvios = new List<decimal>(); // NUEVO
 
         do
         {
@@ -73,32 +74,27 @@ class enviodepaquetes
 
                 // REGLAS DE NEGOCIO
 
-                // 1. Envío gratis
                 if (monto_pedido >= 150000 && clienteFrecuente)
                 {
                     categoria_despacho = "Gratis";
                     costo_envio = 0;
                 }
-                // 2. Envío express
                 else if (cantidad_items >= 5 || monto_pedido >= 300000)
                 {
                     categoria_despacho = "Express";
                     costo_envio = 50;
                 }
-                // 3. Envío estándar
                 else
                 {
                     categoria_despacho = "Estándar";
                     costo_envio = 20;
                 }
 
-                // 4. Costo adicional si es exterior
                 if (ciudad_destino == "exterior")
                 {
                     costo_envio += 15;
                 }
 
-                // Mostrar el costo en miles (multiplicado por 1000 y con separadores de miles)
                 decimal costoFinal = costo_envio * 1000;
 
                 string resumen = "Categoría: " + categoria_despacho +
@@ -109,6 +105,7 @@ class enviodepaquetes
                 Console.WriteLine(resumen);
 
                 historialEnvios.Add(resumen);
+                costosEnvios.Add(costoFinal); // GUARDAMOS COSTO
             }
             else if (opcionMenu == 2)
             {
@@ -124,6 +121,21 @@ class enviodepaquetes
                     {
                         Console.WriteLine(envio);
                     }
+
+                    // CÁLCULOS
+                    int totalEnvios = costosEnvios.Count;
+                    decimal suma = 0;
+
+                    foreach (decimal costo in costosEnvios)
+                    {
+                        suma += costo;
+                    }
+
+                    decimal promedio = suma / totalEnvios;
+
+                    Console.WriteLine("\n=== ESTADÍSTICAS ===");
+                    Console.WriteLine("Total de envíos: " + totalEnvios);
+                    Console.WriteLine("Promedio de costo: $" + promedio.ToString("N0"));
                 }
             }
 
