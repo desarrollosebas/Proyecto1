@@ -18,3 +18,25 @@ class enviodepaquetes
     /// </summary>
     /// <param name="historialEnvios">Lista donde se guardan los resúmenes de los envíos.</param>
     /// <param name="costosEnvios">Lista donde se guardan los costos finales.</param>
+ static void MostrarHistorial(
+        List<string> historialEnvios,
+        List<decimal> costosEnvios
+    )
+    {
+        Console.WriteLine("\n=== HISTORIAL DE ENVÍOS ===");
+
+        // Si no existen envíos registrados se informa al usuario
+        if (historialEnvios.Count == 0)
+        {
+            Console.WriteLine("No hay envíos registrados.");
+            return;
+        }
+
+        // Se muestran todos los envíos guardados
+        foreach (string envio in historialEnvios)
+        {
+            Console.WriteLine(envio);
+        }
+
+        MostrarEstadisticas(costosEnvios);
+    }
