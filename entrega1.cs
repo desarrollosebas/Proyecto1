@@ -18,25 +18,25 @@ class enviodepaquetes
     /// </summary>
     /// <param name="historialEnvios">Lista donde se guardan los resúmenes de los envíos.</param>
     /// <param name="costosEnvios">Lista donde se guardan los costos finales.</param>
- static void MostrarHistorial(
-        List<string> historialEnvios,
-        List<decimal> costosEnvios
-    )
+    static void EjecutarMenu(List<string> historialEnvios, List<decimal> costosEnvios)
     {
-        Console.WriteLine("\n=== HISTORIAL DE ENVÍOS ===");
+        int opcionMenu;
 
-        // Si no existen envíos registrados se informa al usuario
-        if (historialEnvios.Count == 0)
+        do
         {
-            Console.WriteLine("No hay envíos registrados.");
-            return;
-        }
+            MostrarMenu();
+            opcionMenu = LeerOpcionMenu();
 
-        // Se muestran todos los envíos guardados
-        foreach (string envio in historialEnvios)
-        {
-            Console.WriteLine(envio);
-        }
+            // Si el usuario quiere calcular un envío
+            if (opcionMenu == 1)
+            {
+                ProcesarEnvio(historialEnvios, costosEnvios);
+            }
+            // Si el usuario quiere ver el historial
+            else if (opcionMenu == 2)
+            {
+                MostrarHistorial(historialEnvios, costosEnvios);
+            }
 
-        MostrarEstadisticas(costosEnvios);
+        } while (opcionMenu != 3);
     }
