@@ -75,3 +75,38 @@ class enviodepaquetes
     /// </summary>
     /// <param name="historialEnvios">Lista del historial de envíos.</param>
     /// <param name="costosEnvios">Lista de costos registrados.</param>
+    static void ProcesarEnvio(List<string> historialEnvios, List<decimal> costosEnvios)
+    {
+        // Se leen todos los datos necesarios para el envío
+        decimal montoPedido = LeerMontoPedido();
+        string ciudadDestino = LeerCiudadDestino();
+        bool clienteFrecuente = LeerClienteFrecuente();
+        int cantidadItems = LeerCantidadItems();
+
+        string categoriaDespacho;
+        decimal costoFinal;
+
+        // Aquí se realiza toda la lógica del cálculo
+        CalcularEnvio(
+            montoPedido,
+            clienteFrecuente,
+            cantidadItems,
+            ciudadDestino,
+            out categoriaDespacho,
+            out costoFinal
+        );
+
+        // Se construye el texto final que verá el usuario
+        string resumen = CrearResumen(
+            categoriaDespacho,
+            costoFinal,
+            ciudadDestino
+        );
+
+        Console.WriteLine("\nResumen del envío:");
+        Console.WriteLine(resumen);
+
+        // Se guardan los datos en las listas
+        historialEnvios.Add(resumen);
+        costosEnvios.Add(costoFinal);
+    }
