@@ -57,3 +57,21 @@ class enviodepaquetes
     /// Lee y valida la opción ingresada por el usuario.
     /// </summary>
     /// <returns>Retorna una opción válida.</returns>
+ static int LeerOpcionMenu()
+    {
+        int opcion;
+
+        // Se repite hasta que el usuario escriba un número válido
+        while (!int.TryParse(Console.ReadLine(), out opcion))
+        {
+            Console.WriteLine("Entrada inválida. Intente de nuevo:");
+        }
+
+        return opcion;
+    }
+
+    /// <summary>
+    /// Solicita los datos del envío, calcula el costo y guarda la información.
+    /// </summary>
+    /// <param name="historialEnvios">Lista del historial de envíos.</param>
+    /// <param name="costosEnvios">Lista de costos registrados.</param>
