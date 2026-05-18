@@ -195,3 +195,51 @@ class enviodepaquetes
 
         return cantidadItems;
     }
+  /// <summary>
+    /// Aplica las reglas del negocio para calcular el tipo y costo del envío.
+    /// </summary>
+    /// <param name="montoPedido">Monto total del pedido.</param>
+    /// <param name="clienteFrecuente">Indica si el cliente es frecuente.</param>
+    /// <param name="cantidadItems">Cantidad de productos.</param>
+    /// <param name="ciudadDestino">Destino del envío.</param>
+    /// <param name="categoriaDespacho">Categoría calculada.</param>
+    /// <param name="costoFinal">Costo final calculado.</param>
+    static void CalcularEnvio(
+        decimal montoPedido,
+        bool clienteFrecuente,
+        int cantidadItems,
+        string ciudadDestino,
+        out string categoriaDespacho,
+        out decimal costoFinal
+    )
+    {
+        decimal costoEnvio;
+
+        // Cliente frecuente con compra alta obtiene envío gratis
+        if (montoPedido >= 150000 && clienteFrecuente)
+        {
+            categoriaDespacho = "Gratis";
+            costoEnvio = 0;
+        }
+        // Pedidos grandes o con muchos items son express
+        else if (cantidadItems >= 5 || montoPedido >= 300000)
+        {
+            categoriaDespacho = "Express";
+            costoEnvio = 50;
+        }
+        // Los demás pedidos quedan estándar
+        else
+        {
+            categoriaDespacho = "Estándar";
+            costoEnvio = 20;
+        }
+
+        // Si el envío es internacional se suma un costo adicional
+        if (ciudadDestino == "exterior")
+        {
+            costoEnvio += 15;
+        }
+
+        // El costo se multiplica por 1000 para obtener el valor final
+        costoFinal = costoEnvio * 1000;
+    }
