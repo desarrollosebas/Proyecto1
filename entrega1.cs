@@ -155,3 +155,43 @@ class enviodepaquetes
         Console.WriteLine("Ingrese la ciudad de destino:");
         return Console.ReadLine().ToLower();
     }
+
+    /// <summary>
+    /// Pregunta si el cliente es frecuente.
+    /// </summary>
+    /// <returns>Retorna true si el cliente es frecuente.</returns>
+    static bool LeerClienteFrecuente()
+    {
+        int opcionCliente;
+
+        // Solo permite escoger 1 o 2
+        do
+        {
+            Console.WriteLine("¿Es cliente frecuente?");
+            Console.WriteLine("1. Sí");
+            Console.WriteLine("2. No");
+        }
+        while (!int.TryParse(Console.ReadLine(), out opcionCliente)
+               || (opcionCliente != 1 && opcionCliente != 2));
+
+        return opcionCliente == 1;
+    }
+
+    /// <summary>
+    /// Solicita la cantidad de productos del pedido.
+    /// </summary>
+    /// <returns>Retorna la cantidad de items.</returns>
+    static int LeerCantidadItems()
+    {
+        int cantidadItems;
+
+        // Solo se aceptan números mayores a 0
+        do
+        {
+            Console.WriteLine("Ingrese la cantidad de items:");
+        }
+        while (!int.TryParse(Console.ReadLine(), out cantidadItems)
+               || cantidadItems <= 0);
+
+        return cantidadItems;
+    }
