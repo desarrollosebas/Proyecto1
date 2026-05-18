@@ -110,3 +110,48 @@ class enviodepaquetes
         historialEnvios.Add(resumen);
         costosEnvios.Add(costoFinal);
     }
+     /// <summary>
+    /// Solicita y valida el monto del pedido.
+    /// </summary>
+    /// <returns>Retorna el monto ingresado.</returns>
+    static decimal LeerMontoPedido()
+    {
+        decimal montoPedido;
+
+        // Solo permite números mayores a 0
+        do
+        {
+            Console.WriteLine("Ingrese el monto del pedido:");
+        }
+        while (!decimal.TryParse(Console.ReadLine(), out montoPedido)
+               || montoPedido <= 0);
+
+        return montoPedido;
+    }
+
+    /// <summary>
+    /// Pregunta si el envío es nacional o internacional.
+    /// </summary>
+    /// <returns>Retorna la ciudad destino o "exterior".</returns>
+    static string LeerCiudadDestino()
+    {
+        string respuesta;
+
+        // Valida que la respuesta sea si o no
+        do
+        {
+            Console.WriteLine("¿El envío es al exterior? (si/no)");
+            respuesta = Console.ReadLine().ToLower();
+        }
+        while (respuesta != "si" && respuesta != "no");
+
+        // Si es internacional se retorna "exterior"
+        if (respuesta == "si")
+        {
+            return "exterior";
+        }
+
+        // Si no, se pide la ciudad normalmente
+        Console.WriteLine("Ingrese la ciudad de destino:");
+        return Console.ReadLine().ToLower();
+    }
