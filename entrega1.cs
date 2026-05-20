@@ -243,3 +243,73 @@ class enviodepaquetes
         // El costo se multiplica por 1000 para obtener el valor final
         costoFinal = costoEnvio * 1000;
     }
+}
+
+    /// <summary>
+    /// Construye el resumen final del envío.
+    /// </summary>
+    /// <param name="categoriaDespacho">Tipo de despacho.</param>
+    /// <param name="costoFinal">Costo total del envío.</param>
+    /// <param name="ciudadDestino">Destino del envío.</param>
+    /// <returns>Retorna el resumen en formato texto.</returns>
+    static string CrearResumen(
+        string categoriaDespacho,
+        decimal costoFinal,
+        string ciudadDestino
+    )
+    {
+        return "Categoría: " + categoriaDespacho +
+               " | Costo: $" + costoFinal.ToString("N0") +
+               " | Destino: " + ciudadDestino;
+    }
+
+    /// <summary>
+    /// Muestra el historial de envíos registrados.
+    /// </summary>
+    /// <param name="historialEnvios">Lista de envíos guardados.</param>
+    /// <param name="costosEnvios">Lista de costos guardados.</param>
+    static void MostrarHistorial(
+        List<string> historialEnvios,
+        List<decimal> costosEnvios
+    )
+    {
+        Console.WriteLine("\n=== HISTORIAL DE ENVÍOS ===");
+
+        // Si no existen envíos registrados se informa al usuario
+        if (historialEnvios.Count == 0)
+        {
+            Console.WriteLine("No hay envíos registrados.");
+            return;
+        }
+
+        // Se muestran todos los envíos guardados
+        foreach (string envio in historialEnvios)
+        {
+            Console.WriteLine(envio);
+        }
+
+        MostrarEstadisticas(costosEnvios);
+    }
+
+    /// <summary>
+    /// Calcula y muestra estadísticas básicas de los envíos.
+    /// </summary>
+    /// <param name="costosEnvios">Lista de costos registrados.</param>
+    static void MostrarEstadisticas(List<decimal> costosEnvios)
+    {
+        int totalEnvios = costosEnvios.Count;
+        decimal suma = 0;
+
+        // Se suman todos los costos para calcular el promedio
+        foreach (decimal costo in costosEnvios)
+        {
+            suma += costo;
+        }
+
+        decimal promedio = suma / totalEnvios;
+
+        Console.WriteLine("\n=== ESTADÍSTICAS ===");
+        Console.WriteLine("Total de envíos: " + totalEnvios);
+        Console.WriteLine("Promedio de costo: $" + promedio.ToString("N0"));
+    }
+}
