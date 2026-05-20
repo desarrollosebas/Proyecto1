@@ -57,7 +57,7 @@ class enviodepaquetes
     /// Lee y valida la opción ingresada por el usuario.
     /// </summary>
     /// <returns>Retorna una opción válida.</returns>
- static int LeerOpcionMenu()
+    static int LeerOpcionMenu()
     {
         int opcion;
 
@@ -110,7 +110,8 @@ class enviodepaquetes
         historialEnvios.Add(resumen);
         costosEnvios.Add(costoFinal);
     }
-     /// <summary>
+
+    /// <summary>
     /// Solicita y valida el monto del pedido.
     /// </summary>
     /// <returns>Retorna el monto ingresado.</returns>
@@ -195,7 +196,8 @@ class enviodepaquetes
 
         return cantidadItems;
     }
-  /// <summary>
+
+    /// <summary>
     /// Aplica las reglas del negocio para calcular el tipo y costo del envío.
     /// </summary>
     /// <param name="montoPedido">Monto total del pedido.</param>
@@ -243,7 +245,6 @@ class enviodepaquetes
         // El costo se multiplica por 1000 para obtener el valor final
         costoFinal = costoEnvio * 1000;
     }
-}
 
     /// <summary>
     /// Construye el resumen final del envío.
